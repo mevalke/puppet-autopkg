@@ -1,0 +1,15 @@
+{
+  "name": "puppet-autopkg",
+  "version": "0.1.0",
+  "author": "mevalke@gmail.com",
+  "summary": "Puppet module for setting up Autopkg",
+  "license": "Apache-2.0",
+  "source": "https://github.com/mevalke/puppet-autopkg",
+  "project_page": "https://github.com/mevalke/puppet-autopkg",
+  "issues_url": "https://github.com/mevalke/puppet-autopkg/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ],
+  "data_provider": null
+}
+
