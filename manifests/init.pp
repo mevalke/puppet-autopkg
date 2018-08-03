@@ -25,7 +25,7 @@ class autopkg {
   file { "$autopkg_folder/log": ensure => file }
 
   exec { 'tunnel_smb_through_ssh_to_munki_server':
-    command => "ssh -fNti /Users/$autopkg_user/.ssh/companykey -o 'StrictHostKeyChecking no' -L 139:127.0.0.1:139 $autopkg_user@$munki_server",
+    command => "ssh -fNti /Users/$autopkg_user/.ssh/$autopkg_ssh_key -o 'StrictHostKeyChecking no' -L 139:127.0.0.1:139 $autopkg_user@$munki_server",
     path    => '/bin:/usr/bin:/sbin',
     unless  => "ps aux | grep '139:127.0.0.1:139 $autopkg_user@$munki_server'", 
   }
