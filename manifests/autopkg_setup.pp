@@ -11,40 +11,35 @@ define autopkg::autopkg_setup (
 ) {
   exec { "Setting Autopkg Munki Repository $munki_repo":
     command => "/usr/bin/defaults write com.github.autopkg MUNKI_REPO -string $munki_repo",
-    onlyif  => "ls /usr/local/bin/autopkg && ls $munki_repo",
-    unless  => "/usr/bin/defaults read com.github.autopkg MUNKI_REPO|grep $munki_repo",
+    onlyif  => "ls /usr/local/bin/autopkg",
     timeout => 0,
     path    => '/bin:/usr/bin:/usr/local/bin',
     user    => $autopkg_user,
   }
   exec { "Setting Autopkg Cache $cache_dir":
     command => "/usr/bin/defaults write com.github.autopkg CACHE_DIR -string $cache_dir",
-    onlyif  => "ls /usr/local/bin/autopkg && ls $cache_dir",
-    unless  => "/usr/bin/defaults read com.github.autopkg CACHE_DIR|grep $cache_dir",
+    onlyif  => "ls /usr/local/bin/autopkg",
     timeout => 0,
     path    => '/bin:/usr/bin:/usr/local/bin',
     user    => $autopkg_user,
   }
   exec { "Setting Autopkg Search Directory $recipe_search_dirs":
     command => "/usr/bin/defaults write com.github.autopkg RECIPE_SEARCH_DIRS -string $recipe_search_dirs",
-    onlyif  => "ls /usr/local/bin/autopkg && ls $recipe_search_dirs",
-    unless  => "/usr/bin/defaults read com.github.autopkg RECIPE_SEARCH_DIRS|grep $recipe_search_dirs",
+    onlyif  => "ls /usr/local/bin/autopkg",
     timeout => 0,
     path    => '/bin:/usr/bin:/usr/local/bin',
     user    => $autopkg_user,
   }
   exec { "Setting Autopkg Recipe Override Directory $recipe_override_dirs":
     command => "/usr/bin/defaults write com.github.autopkg RECIPE_OVERRIDE_DIRS -string $recipe_override_dirs",
-    onlyif  => "ls /usr/local/bin/autopkg && ls $recipe_override_dirs",
-    unless  => "/usr/bin/defaults read com.github.autopkg RECIPE_OVERRIDE_DIRS|grep $recipe_override_dirs",
+    onlyif  => "ls /usr/local/bin/autopkg",
     timeout => 0,
     path    => '/bin:/usr/bin:/usr/local/bin',
     user    => $autopkg_user,
   }
   exec { "Setting Autopkg Repository Directory $recipe_repo_dir":
     command => "/usr/bin/defaults write com.github.autopkg RECIPE_REPO_DIR -string $recipe_repo_dir",
-    onlyif  => "ls /usr/local/bin/autopkg && ls $recipe_repo_dir",
-    unless  => "/usr/bin/defaults read com.github.autopkg RECIPE_REPO_DIR|grep $recipe_repo_dir",
+    onlyif  => "ls /usr/local/bin/autopkg",
     timeout => 0,
     path    => '/bin:/usr/bin:/usr/local/bin',
     user    => $autopkg_user,
@@ -72,7 +67,7 @@ define autopkg::autopkg_setup (
       user    => $autopkg_user,
       require => Exec["Adding additional Autopkg Recipes for Munki Repository $munki_repo"],
     }
-  }    
+  }
   exec {"Running Autopkg Recipes for Munki Repository $munki_repo":
     command => "/usr/local/bin/autopkg run $recipes",
     onlyif  => "ls /usr/local/bin/autopkg",
@@ -81,4 +76,3 @@ define autopkg::autopkg_setup (
     user    => $autopkg_user,
   }
 }
-
