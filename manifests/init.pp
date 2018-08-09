@@ -47,6 +47,7 @@ class autopkg {
     $recipe_repos = $param['recipe_repos']
     $recipes = $param['recipes']
     $recipe_arr = split($recipes, ' ')
+    $full_recipe_arr = concat($recipe_arr, ['MakeCatalogs.munki.recipe'])
     if $repo != 'en' {
       $locale = $repo
     } else {
@@ -61,7 +62,8 @@ class autopkg {
       recipe_repo_dir      => "$autopkg_folder/$repo/RecipeRepos",
       recipe_repos         => $recipe_repos,
       recipes              => "--post io.github.hjuutilainen.VirusTotalAnalyzer/VirusTotalAnalyzer --key LOCALE=$locale -k FAIL_RECIPES_WITHOUT_TRUST_INFO=no $recipes MakeCatalogs.munki.recipe",
-      recipe_arr           => $recipe_arr,
+      recipe_arr           => $full_recipe_arr,
     }
   }
 }
+

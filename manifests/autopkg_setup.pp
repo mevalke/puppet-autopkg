@@ -76,3 +76,4 @@ define autopkg::autopkg_setup (
     user    => $autopkg_user,
   }
 }
+
